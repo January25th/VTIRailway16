@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account`(
 	AccountID				SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Email					VARCHAR(50) NOT NULL UNIQUE KEY,
-    Username				VARCHAR(50) NOT NULL UNIQUE KEY CHECK(length(Username)>=6),
+    Username				VARCHAR(50) NOT NULL UNIQUE KEY, -- CHECK(length(Username)>=6),
     Fullname				NVARCHAR(50) NOT NULL UNIQUE KEY,
     DepartmentID			TINYINT UNSIGNED NOT NULL,
     PositionID				TINYINT UNSIGNED NOT NULL,
@@ -47,13 +47,13 @@ CREATE TABLE GroupAccount(
 
 DROP TABLE IF EXISTS TypeQuestion;
 CREATE TABLE TypeQuestion(
-	TypeID					TINYINT UNSIGNED PRIMARY KEY,
-    TypeName				ENUM('Essay','Multiple Choice')
+	TypeID					TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    TypeName				ENUM('Essay','Multiple-Choice')
 );
 
 DROP TABLE IF EXISTS CategoryQuestion;
 CREATE TABLE CategoryQuestion(
-	CategoryID				TINYINT UNSIGNED PRIMARY KEY,
+	CategoryID				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     CategoryName			VARCHAR(50)
     );
 
@@ -95,7 +95,7 @@ CREATE TABLE `Exam`(
 
 DROP TABLE IF EXISTS ExamQuestion;
 CREATE TABLE ExamQuestion(
-	ExamID					TINYINT UNSIGNED,
+	ExamID					TINYINT UNSIGNED AUTO_INCREMENT,
     QuestionID				SMALLINT UNSIGNED NOT NULL REFERENCES Question(QuestionID),
 	PRIMARY KEY(ExamID,QuestionID),
     FOREIGN KEY(ExamID) REFERENCES Exam(ExamID),
